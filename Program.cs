@@ -31,29 +31,12 @@ namespace expression_members
         // Convert this method to an expression member
         
         public string PreyList() => string.Join(", ", this.Prey);
-        // public string PreyList()
-        // {
-        //     var commaDelimitedPrey = string.Join(", ", this.Prey);
-        //     return commaDelimitedPrey;
-        // }
 
-        // Convert this method to an expression member
-        public string PredatorList()
-        {
-            var commaDelimitedPredators = string.Join(",", this.Predators);
-            return commaDelimitedPredators;
-        }
+        // Convert this method to an expression member'
+        public string PredatorList() => string.Join(", ", this.Predators);
 
         // Convert this to expression method (hint: use a C# ternary)
-        public string Eat(string food)
-        {
-            if (this.Prey.Contains(food))
-            {
-                return $"{this.Name} ate the {food}.";
-            } else {
-                return $"{this.Name} is still hungry.";
-            }
-        }
+        public string Eat(string food) => (this.Prey.Contains(food)) ? $"{this.Name} ate the {food}." : (this.Predators.Contains(food)) ? $"{this.Name} is dead." : $"{this.Name} needs some food";
     }
     class Program
     {
@@ -63,7 +46,7 @@ namespace expression_members
             predators.Add("human feet");
             predators.Add("birds");
             Bug Johnny = new Bug("Johnny", "Mantis", predators, new List<string>(){"aphids", "water"});
-            Console.WriteLine(Johnny.PreyList());
+            Console.WriteLine(Johnny.Eat("human feet"));
         }
     }
 }
